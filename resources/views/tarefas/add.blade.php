@@ -18,8 +18,14 @@
             <button type="submit">Adicionar</button>
         </form>
 
-        @if (session('warning'))
+        {{-- @if (session('warning'))
             <p>{{ session('warning') }}</p>
+        @endif --}}
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error )
+                {{ $error }} <br>
+            @endforeach
         @endif
 
     </section>

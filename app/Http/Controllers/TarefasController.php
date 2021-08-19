@@ -23,23 +23,15 @@ class TarefasController extends Controller
     }
 
     public function addAction(Request $request) {
-        try {
-            if ($request->filled('titulo')) {
-                $titulo = $request->input('titulo');
-                Tarefa::add($titulo);
 
-                return redirect('/tarefas');
-            } else {
-                return redirect('/tarefas/add')
-                ->with('warning', 'Coloque um título!');
-            }
+        $request->validate([
+            'titulo' => ['required', 'string']
+        ]);
 
+        $titulo = $request->titulo;
+        Tarefa::add($titulo);
 
-        }catch (\Exception $ex) {
-
-        }
-
-
+        return redirect('/tarefas');
     }
 
     public function edit($id) {
