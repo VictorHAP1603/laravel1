@@ -7,7 +7,7 @@
         <h1>Editar Tarefa</h1>
 
 
-        <form action="/tarefas/edit/{{$tarefa->id}}">
+        <form action="/tarefas/edit/{{$tarefa->id}}" method="post">
             @csrf
             <label>
                 <span>Titulo</span>

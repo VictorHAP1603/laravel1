@@ -56,19 +56,37 @@ class TarefasController extends Controller
     }
 
     public function editAction(Request $request, $id) {
+
         if ($request->filled('titulo')) {
+            $titulo = $request->titulo;
+            $task = Tarefa::getById($id);
 
+            if (count($task) > 0) {
+                Tarefa::edit($id, $titulo);
+            }
 
+            return redirect('/tarefas');
         } else {
-
+            return redirect("/tarefas/edit/$id");
         }
+
     }
 
     public function delete($id) {
-
+        Tarefa::remove($id);
+        return redirect('/tarefas');
     }
 
     public function resolved($id) {
+
+        $task = Tarefa::getById($id)[0];
+
+        if ($task) {
+            $resolved = $task->resolvido === 1 ? 0 : 1;
+            Tarefa::editResolved($id, $resolved);
+        }
+
+        return redirect('/tarefas');
 
     }
 

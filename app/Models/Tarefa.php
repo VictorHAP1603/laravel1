@@ -30,6 +30,20 @@ class Tarefa extends Model
 
     public static function edit ($id, $titulo) {
 
+        $sql = 'UPDATE tarefas SET titulo = :titulo WHERE id = :id';
+        return DB::update($sql, ['id' => $id, 'titulo' => $titulo]);
+
+    }
+
+    public static function remove ($id) {
+        $sql = 'DELETE FROM tarefas WHERE id = :id';
+        return DB::delete($sql, [':id' => $id]);
+    }
+
+    public static function editResolved ($id, $resolved) {
+
+        $sql = 'UPDATE tarefas SET resolvido = :resolvido WHERE id = :id';
+        return DB::update($sql, ['id' => $id, 'resolvido' => $resolved]);
     }
 }
 

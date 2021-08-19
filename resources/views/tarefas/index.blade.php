@@ -28,7 +28,11 @@
                                 ||
                                 <a href="/tarefas/edit/{{$item->id}}">[ Editar ]</a>
                                 ||
-                                <a href="/tarefas/delete/{{$item->id}}">[ Excluir ]</a>
+                                <a
+                                href="/tarefas/delete/{{$item->id}}"
+                                onclick="return confirm('Deseja realmente excluir?')">
+                                    [ Excluir ]
+                                </a>
                             </td>
                         </tr>
                     @endforeach
