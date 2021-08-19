@@ -15,10 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', "HomeController@index");
 
+Route::resource('todo', 'TodoController');
+
+/*
+GET     - /todo             - index         - todo.index    - LISTA TODOS OS ITENS
+GET     - /todo/{create}    - create        - todo.create   - FORM DE CRIAÇÃO
+POST    - /todo             - store         - todo.store    - RECEBER OS DADOS E ADD ITEM
+GET     - /todo/{id}        - show          - todo.show     - ITEM INDIVIDUAL
+GET     - /todo/{id}/edit   - edit          - todo.edit     - FORM DE EDIÇÃO
+PUT     - /todo/{id}        - update        - todo.update   - RECEBER OS DADOS E UPDATE ITEM
+DELETE  - /todo/{id}        - destroy       - todo.destroy  - DELETE O ITEM
+*/
 
 Route::prefix('/tarefas')->group(function () {
 
-    Route::get('/', 'TarefasController@index'); // Listagem de Tarefas
+    Route::get('/', 'TarefasController@index')->middleware('auth'); // Listagem de Tarefas
 
     Route::get('/add', 'TarefasController@add'); // tela de adicão de novas tarefas
     Route::post('/add', 'TarefasController@addAction'); // Ação de adição
